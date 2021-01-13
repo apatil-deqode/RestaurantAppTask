@@ -1,20 +1,23 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import SearchBar from '../components/SearchBar';
+import useSearchScreen from "../hooks/useSearchScreen";
+import RestaurantList from "../components/RestaurantList"
 const SearchScreen = () => {
   const [term, setTerm] = useState('');
-  const callApiSearch = (strSearch) => {
-    console.log('>>>> 1', strSearch);
-  };
+  const [callApiSearch,errorMessage,result] = useSearchScreen()
 
   return (
     <View>
       <SearchBar
         term={term}
-        onChangeTerm={(newTerm) => setTerm(newTerm)}
-        onTermSubmitted={(strSearch) => callApiSearch(strSearch)}
+        onChangeTerm={setTerm}
+        onTermSubmitted={() => callApiSearch(term)}
       />
-      <Text>{term}</Text>
+      {errorMessage ? <Text>{errorMessage}</Text> : null}
+      <RestaurantList title = 'Cost Effective'/>
+      <RestaurantList title = 'Bit Pricier'/>
+      <RestaurantList title = 'Gig Spender'/>
     </View>
   );
 };
