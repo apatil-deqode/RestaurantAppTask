@@ -13,7 +13,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import SearchScreen from './screens/SearchScreen';
-
+import ResturantDetail from './screens/ResturantDetail';
 const Stack = createStackNavigator();
 
 function NavStack() {
@@ -33,6 +33,11 @@ function NavStack() {
         name="SearchScreen"
         component={SearchScreen}
         options={{title: 'Search Screen'}}
+      />
+      <Stack.Screen
+        name="ResturantDetail"
+        component={ResturantDetail}
+        options={{title: 'Resturant Detail'}}
       />
     </Stack.Navigator>
   );

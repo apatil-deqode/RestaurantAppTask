@@ -1,18 +1,27 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import styles from '../res/styles';
 import SingleResturant from './SingleResturant';
-const RestaurantList = ({title, result}) => {
-  console.log(result, 'result >>');
+// import {withNavigation} from 'recat-navigation';
+
+const RestaurantList = ({title, result, navigation}) => {
   return (
-    <View>
+    <View style={{marginBottom: 10}}>
       <Text style={styles.headerTitleRestaurantList}>{title}</Text>
       <FlatList
         horizontal
+        showsHorizontalScrollIndicator={false}
         data={result}
         keyExtractor={(resultt) => resultt.id}
         renderItem={({item}) => {
-          return <SingleResturant item={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('ResturantDetail', {id: item.id})
+              }>
+              <SingleResturant item={item} />
+            </TouchableOpacity>
+          );
         }}
         // {({item}) => (
         //   <View>
